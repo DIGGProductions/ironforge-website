@@ -25,6 +25,14 @@ export const metadata: Metadata = {
       "In-shop DOT inspections and full medium-duty repair under one roof, between Castle Rock and Colorado Springs.",
     locale: "en_US",
     url: SITE.url,
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Iron Forge Commercial Repair, Sedalia CO" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Commercial Truck Repair & DOT Inspections | Iron Forge, Sedalia CO",
+    description:
+      "In-shop DOT inspections and full medium-duty repair under one roof, between Castle Rock and Colorado Springs.",
+    images: ["/og.jpg"],
   },
   robots: { index: true, follow: true },
 };

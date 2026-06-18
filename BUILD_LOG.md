@@ -65,3 +65,22 @@ Running record of decisions, status, and open items. Newest notes at the bottom 
 - Custom on-brand 404: PASS.
 - Reduced motion respected; keyboard focus visible; images have alt text: PASS.
 - Lighthouse 95+: to confirm on the deployed URL (no headless browser in build env).
+
+## Phase 8 photos (from Facebook export)
+Reviewed all 1,477 images in the page export. The page is trailer- and plow-focused,
+so truck/shop/plow/tire shots are plentiful; literal brake/wiring/engine close-ups are scarce.
+Placed accurate matches and kept styled placeholders where no fitting shot exists.
+
+Placed:
+- Hero: white work truck under a dramatic sky (FB Photos album).
+- About band + About page: the crew in the shop.
+- DOT inspection card (home + hub): a truck in the bay.
+- Brake repair (home card, hub card, service page): axle and brake with the wheel off.
+- Tires (home card, hub card, service page): commercial tires.
+- Preventive maintenance (hub card, service page): a truck in the shop bay.
+- Snow plows (hub card, service page): a Boss plow install.
+
+Still placeholders (no accurate shot in the export, easy to drop in later):
+- Lighting & Electrical (home card + page), Steering & Suspension, Exhaust & Emissions, Engine & Drivetrain.
+
+All images optimized to web (max 1920px hero / 1400px others, quality 82, EXIF stripped).

@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import Section from "@/components/Section";
+import Eyebrow from "@/components/Eyebrow";
 import PhotoSlot from "@/components/PhotoSlot";
 import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import { SITE } from "@/content/site";
+import { PHOTOS } from "@/content/photos";
 import { breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
@@ -44,7 +46,7 @@ export default function AboutPage() {
         showCtas={false}
       />
 
-      <section className="bg-forge-black py-[clamp(48px,7vw,88px)]">
+      <section className="zone-light border-t border-line py-[clamp(48px,7vw,88px)]">
         <div className="container grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="space-y-4 text-[1.07rem] leading-relaxed text-muted">
             <p>
@@ -64,9 +66,43 @@ export default function AboutPage() {
             </p>
           </div>
           <PhotoSlot
-            ratio="aspect-[4/3]"
+            ratio="aspect-[3/2]"
+            src={PHOTOS.about}
+            alt="The crew in the Iron Forge shop in Sedalia, Colorado"
             description="Will and the team in front of the shop, or the yard lined with Boss plows"
           />
+        </div>
+      </section>
+
+      {/* OWNER FEATURE */}
+      <section className="zone-light border-t border-line py-[clamp(48px,7vw,88px)]">
+        <div className="container grid items-center gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:gap-16">
+          <PhotoSlot
+            ratio="aspect-[3/4]"
+            src={PHOTOS.will}
+            alt="Will Larabee, owner of Iron Forge Commercial Repair"
+            description="Will Larabee, owner"
+          />
+          <div>
+            <Eyebrow>The owner</Eyebrow>
+            <h2 className="mt-4 font-display text-h2 font-extrabold uppercase text-text">Will Larabee</h2>
+            <p className="mt-5 text-[1.07rem] leading-relaxed text-muted">
+              Will Larabee has run Iron Forge since 2012, and he still runs it hands-on. He built the
+              shop around a skilled team of mechanics and one standard: do the work right, do it fast,
+              and stand behind it. Bring a truck in and there is a good chance the man with the gray
+              beard is the one who tells you straight what it needs and what it does not.
+            </p>
+            <p className="mt-4 text-[1.07rem] leading-relaxed text-muted">
+              What Will cares about is keeping your equipment working and your downtime short. Every
+              truck and trailer that comes through gets treated like it is one of ours, because the
+              businesses that depend on them are our neighbors. He keeps the turnaround fast and the
+              standards high, and he tells you the truth about the work.
+            </p>
+            <p className="mt-4 text-[1.07rem] leading-relaxed text-muted">
+              That is the difference a family-owned shop makes. You are not a work order. You are the
+              business that truck keeps running, and Will and his team run the shop like they know it.
+            </p>
+          </div>
         </div>
       </section>
 

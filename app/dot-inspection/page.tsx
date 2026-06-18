@@ -5,11 +5,11 @@ import Eyebrow from "@/components/Eyebrow";
 import SpecPlate from "@/components/SpecPlate";
 import Faq from "@/components/Faq";
 import Button from "@/components/Button";
-import FlagNote from "@/components/FlagNote";
 import BookingForm from "@/components/BookingForm";
 import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import { SITE } from "@/content/site";
+import { PHOTOS } from "@/content/photos";
 import { DOT_FAQS } from "@/content/faqs";
 import { serviceSchema, faqSchema, breadcrumbSchema } from "@/lib/schema";
 
@@ -46,10 +46,12 @@ export default function DotInspectionPage() {
         sub="Iron Forge runs your DOT inspection and repairs what it flags under one roof, so a commercial truck near Castle Rock or anywhere on the corridor does not sit out of service waiting on a second shop."
         crumbs={crumbs}
         ctaHref="#book"
+        bgImage={PHOTOS.dotHero}
+        bgAlt="Medium-duty trucks at Iron Forge in Sedalia, Colorado"
       />
 
       {/* What it is + spec echo */}
-      <section className="bg-forge-black py-[clamp(48px,7vw,88px)]">
+      <section className="zone-light border-t border-line py-[clamp(48px,7vw,88px)]">
         <div className="container grid items-start gap-12 lg:grid-cols-[1.1fr_.9fr]">
           <div>
             <Eyebrow>What it is and who needs one</Eyebrow>
@@ -77,7 +79,6 @@ export default function DotInspectionPage() {
               { label: "What it is", value: "State annual safety inspection" },
               { label: "Covers", value: <>Brakes, steering, lights,<br />and more</> },
               { label: "If it fails", value: <>We fix it here,<br />same stop</> },
-              { label: "Price", value: <FlagNote>Confirm with Will</FlagNote> },
             ]}
           />
         </div>
@@ -148,8 +149,8 @@ export default function DotInspectionPage() {
               .
             </p>
             <p className="text-[0.95rem]">
-              Pricing: <FlagNote>Confirm with Will</FlagNote> We will give you a straight number before
-              you come in.
+              Not sure what it will run? Send your details and we will give you a straight quote
+              before you come in.
             </p>
           </div>
           <BookingForm id="book" kind="inspection" />

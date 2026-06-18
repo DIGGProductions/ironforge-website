@@ -59,7 +59,7 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
           </div>
         </header>
 
-        <div className="bg-forge-black py-[clamp(40px,6vw,72px)]">
+        <div className="zone-light py-[clamp(40px,6vw,72px)]">
           <div className="container">
             <div className="max-w-2xl">
               <Component />

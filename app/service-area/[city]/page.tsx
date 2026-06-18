@@ -49,7 +49,7 @@ export default function CityPage({ params }: { params: { city: string } }) {
         crumbs={crumbs}
       />
 
-      <section className="bg-forge-black py-[clamp(48px,7vw,88px)]">
+      <section className="zone-light border-t border-line py-[clamp(48px,7vw,88px)]">
         <div className="container grid gap-12 lg:grid-cols-[1.1fr_.9fr]">
           <div>
             <Eyebrow>Serving {a.name}</Eyebrow>

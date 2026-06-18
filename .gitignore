@@ -30,3 +30,7 @@ next-env.d.ts
 
 # vercel
 .vercel
+
+# logs / scratch
+*.log
+.write_test

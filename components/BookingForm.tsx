@@ -2,11 +2,9 @@
 
 import { useState } from "react";
 import { SITE } from "@/content/site";
-import FlagNote from "./FlagNote";
 
-// Reusable request form. Swap to a real endpoint or scheduler when the owner picks
-// one (see [CONFIRM WITH WILL] in BUILD_LOG). Until then it validates client-side
-// and routes people to the phone so no request is silently lost.
+// Reusable request form. If a real form service or scheduler is connected later,
+// set FORM_ENDPOINT. Until then it composes an email to the shop so no request is lost.
 const FORM_ENDPOINT = ""; // [CONFIRM WITH WILL] form service URL or scheduler embed
 
 type Kind = "inspection" | "fleet";
@@ -26,10 +24,9 @@ export default function BookingForm({
   heading?: string;
   intro?: string;
 }) {
-  const [status, setStatus] = useState<"idle" | "submitting" | "sent" | "unconnected">("idle");
+  const [status, setStatus] = useState<"idle" | "submitting" | "sent">("idle");
 
-  const defaultHeading =
-    kind === "fleet" ? "Request a fleet quote" : "Request a DOT inspection";
+  const defaultHeading = kind === "fleet" ? "Request a fleet quote" : "Request a DOT inspection";
   const defaultIntro =
     kind === "fleet"
       ? "Tell us about your fleet and we will put together a maintenance and compliance plan."
@@ -37,22 +34,31 @@ export default function BookingForm({
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!FORM_ENDPOINT) {
-      setStatus("unconnected");
-      return;
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    if (FORM_ENDPOINT) {
+      try {
+        setStatus("submitting");
+        const res = await fetch(FORM_ENDPOINT, { method: "POST", body: data, headers: { Accept: "application/json" } });
+        setStatus("sent");
+        if (res.ok) form.reset();
+        return;
+      } catch {
+        // fall through to email
+      }
     }
-    try {
-      setStatus("submitting");
-      const data = new FormData(e.currentTarget);
-      const res = await fetch(FORM_ENDPOINT, {
-        method: "POST",
-        body: data,
-        headers: { Accept: "application/json" },
-      });
-      setStatus(res.ok ? "sent" : "unconnected");
-    } catch {
-      setStatus("unconnected");
-    }
+
+    // Email fallback: compose a message to the shop.
+    const subject = kind === "fleet" ? "Fleet quote request" : "DOT inspection request";
+    const lines: string[] = [];
+    data.forEach((value, key) => {
+      if (typeof value === "string" && value.trim()) lines.push(`${key}: ${value}`);
+    });
+    const body = lines.join("\n");
+    const to = SITE.email ?? "";
+    window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setStatus("sent");
   }
 
   return (
@@ -65,36 +71,36 @@ export default function BookingForm({
       <form onSubmit={onSubmit} className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor={`${id}-name`} className={labelCls}>Name</label>
-          <input id={`${id}-name`} name="name" required className={fieldCls} autoComplete="name" />
+          <input id={`${id}-name`} name="Name" required className={fieldCls} autoComplete="name" />
         </div>
         <div>
           <label htmlFor={`${id}-phone`} className={labelCls}>Phone</label>
-          <input id={`${id}-phone`} name="phone" type="tel" required className={fieldCls} autoComplete="tel" />
+          <input id={`${id}-phone`} name="Phone" type="tel" required className={fieldCls} autoComplete="tel" />
         </div>
         <div>
           <label htmlFor={`${id}-email`} className={labelCls}>Email</label>
-          <input id={`${id}-email`} name="email" type="email" className={fieldCls} autoComplete="email" />
+          <input id={`${id}-email`} name="Email" type="email" className={fieldCls} autoComplete="email" />
         </div>
         {kind === "fleet" ? (
           <div>
             <label htmlFor={`${id}-count`} className={labelCls}>Number of vehicles</label>
-            <input id={`${id}-count`} name="vehicle_count" className={fieldCls} inputMode="numeric" />
+            <input id={`${id}-count`} name="Number of vehicles" className={fieldCls} inputMode="numeric" />
           </div>
         ) : (
           <div>
             <label htmlFor={`${id}-date`} className={labelCls}>Preferred date</label>
-            <input id={`${id}-date`} name="preferred_date" type="date" className={fieldCls} />
+            <input id={`${id}-date`} name="Preferred date" type="date" className={fieldCls} />
           </div>
         )}
         <div className="sm:col-span-2">
           <label htmlFor={`${id}-vehicle`} className={labelCls}>
             {kind === "fleet" ? "Fleet type (landscaping, utility, construction, municipal)" : "Vehicle (year, make, type)"}
           </label>
-          <input id={`${id}-vehicle`} name="vehicle" className={fieldCls} />
+          <input id={`${id}-vehicle`} name="Vehicle" className={fieldCls} />
         </div>
         <div className="sm:col-span-2">
           <label htmlFor={`${id}-message`} className={labelCls}>What do you need?</label>
-          <textarea id={`${id}-message`} name="message" rows={4} className={fieldCls} />
+          <textarea id={`${id}-message`} name="Message" rows={4} className={fieldCls} />
         </div>
 
         <div className="sm:col-span-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -116,17 +122,8 @@ export default function BookingForm({
 
       {status === "sent" && (
         <p className="mt-4 rounded-[3px] border border-gold-deep bg-gold/10 px-4 py-3 text-[0.95rem] text-gold-bright">
-          Thanks. We have your request and will be in touch to confirm a time.
-        </p>
-      )}
-      {status === "unconnected" && (
-        <p className="mt-4 rounded-[3px] border border-line bg-steel-800 px-4 py-3 text-[0.95rem] text-muted">
-          <FlagNote>Booking not connected</FlagNote>{" "}
-          Online submission is not wired up yet. Please call{" "}
-          <a href={SITE.phoneHref} className="font-semibold text-gold hover:text-gold-bright">
-            {SITE.phoneDisplay}
-          </a>{" "}
-          to book and we will get you scheduled.
+          Thanks. Your email app should open with the details ready to send. If it does not, call{" "}
+          <a href={SITE.phoneHref} className="font-semibold underline">{SITE.phoneDisplay}</a> and we will get you scheduled.
         </p>
       )}
     </div>

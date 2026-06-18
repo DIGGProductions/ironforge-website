@@ -6,6 +6,7 @@ import BookingForm from "@/components/BookingForm";
 import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import { SITE } from "@/content/site";
+import { PHOTOS } from "@/content/photos";
 import { serviceSchema, breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
@@ -48,9 +49,11 @@ export default function FleetPage() {
         crumbs={crumbs}
         ctaHref="#quote"
         ctaLabel="Request a fleet quote"
+        bgImage={PHOTOS.fleet}
+        bgAlt="Iron Forge medium-duty work trucks lined up outside the shop in Sedalia, Colorado"
       />
 
-      <section className="bg-forge-black py-[clamp(48px,7vw,88px)]">
+      <section className="zone-light border-t border-line py-[clamp(48px,7vw,88px)]">
         <div className="container max-w-3xl">
           <Eyebrow>The job of keeping a fleet legal</Eyebrow>
           <div className="mt-5 space-y-4 text-[1.07rem] leading-relaxed text-muted">

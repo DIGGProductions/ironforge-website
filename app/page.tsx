@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import Eyebrow from "@/components/Eyebrow";
 import Button from "@/components/Button";
@@ -8,12 +9,10 @@ import Section from "@/components/Section";
 import ServiceCard, { type ServiceCardData } from "@/components/ServiceCard";
 import PhotoSlot from "@/components/PhotoSlot";
 import CtaBand from "@/components/CtaBand";
-import { SITE, BOOK_LABEL, BOOK_HREF } from "@/content/site";
-
-const heroBg = {
-  background:
-    "radial-gradient(900px 420px at 12% -10%, rgba(212,162,78,.16), transparent 60%), radial-gradient(700px 500px at 100% 120%, rgba(156,107,46,.10), transparent 55%), linear-gradient(180deg, #16191E, #0D0F12)",
-};
+import Testimonials from "@/components/Testimonials";
+import { SITE, BOOK_HREF } from "@/content/site";
+import { PHOTOS, SERVICE_PHOTOS } from "@/content/photos";
+import { POSTS, formatDate } from "@/content/posts";
 
 const previewCards: ServiceCardData[] = [
   {
@@ -23,6 +22,7 @@ const previewCards: ServiceCardData[] = [
     blurb:
       "State annual safety inspections for medium-duty trucks and trailers. If it fails, we fix it here and get you road-legal.",
     photoDescription: "Inspector with clipboard working under a truck",
+    src: PHOTOS.dot,
     featured: true,
   },
   {
@@ -32,6 +32,7 @@ const previewCards: ServiceCardData[] = [
     blurb:
       "The top reason trucks fail inspection. Chambers, slack adjusters, shoes, and linings done right.",
     photoDescription: "Brake drum and chamber close-up, hands working",
+    src: SERVICE_PHOTOS["brake-repair"],
   },
   {
     href: "/services/tires",
@@ -40,6 +41,7 @@ const previewCards: ServiceCardData[] = [
     blurb:
       "Commercial truck and trailer tire sales and replacement, in and out with minimal downtime.",
     photoDescription: "Commercial tire being mounted in the bay",
+    src: SERVICE_PHOTOS["tires"],
   },
   {
     href: "/services/lighting-electrical",
@@ -48,6 +50,7 @@ const previewCards: ServiceCardData[] = [
     blurb:
       "Burned-out lamps and bad wiring are a top inspection violation. We trace, repair, and get every light legal.",
     photoDescription: "Tech tracing a trailer wiring harness or truck lights",
+    src: SERVICE_PHOTOS["lighting-electrical"],
   },
 ];
 
@@ -55,8 +58,18 @@ export default function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="scanlines relative overflow-hidden border-b border-gold-deep" style={heroBg}>
-        <div className="container relative grid items-center gap-12 py-[clamp(56px,9vw,92px)] lg:grid-cols-[1.25fr_.85fr] lg:gap-14">
+      <section className="relative overflow-hidden border-b border-gold-deep">
+        <Image
+          src={PHOTOS.hero}
+          alt="A work truck at the Iron Forge shop in Sedalia, Colorado"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(13,15,18,0.95)_0%,rgba(13,15,18,0.84)_40%,rgba(13,15,18,0.55)_100%)]" />
+        <div className="scanlines pointer-events-none absolute inset-0" />
+        <div className="container relative grid items-center gap-12 py-[clamp(56px,9vw,96px)] lg:grid-cols-[1.25fr_.85fr] lg:gap-14">
           <div>
             <Reveal delay={1}>
               <Eyebrow>Est. 2012 · Sedalia, CO · I-25 Corridor</Eyebrow>
@@ -105,17 +118,6 @@ export default function HomePage() {
             />
           </Reveal>
         </div>
-
-        {/* Hero photo slot (background image goes here in Phase 8). */}
-        <div className="container relative -mt-2 pb-6">
-          <span className="inline-flex items-center gap-2 rounded-[3px] border border-line bg-steel-900/70 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
-            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <path d="M3 8h3.5l1.5-2h8l1.5 2H21a1.5 1.5 0 0 1 1.5 1.5v8.5a1.5 1.5 0 0 1-1.5 1.5H3a1.5 1.5 0 0 1-1.5-1.5V9.5A1.5 1.5 0 0 1 3 8z" />
-              <circle cx="12" cy="13.5" r="3.5" />
-            </svg>
-            Hero photo: medium-duty truck up on the lift, mid-service
-          </span>
-        </div>
       </section>
 
       {/* PROOF */}
@@ -143,7 +145,7 @@ export default function HomePage() {
       </Section>
 
       {/* ABOUT BAND */}
-      <section className="border-t border-line bg-steel-900 py-[clamp(56px,8vw,100px)]">
+      <section className="zone-light border-t border-line py-[clamp(56px,8vw,100px)]">
         <div className="container grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <Eyebrow>Family owned since 2012</Eyebrow>
@@ -167,51 +169,80 @@ export default function HomePage() {
             </Link>
           </div>
           <PhotoSlot
-            ratio="aspect-[4/3]"
+            ratio="aspect-[3/2]"
+            src={PHOTOS.about}
+            alt="The crew in the Iron Forge shop in Sedalia, Colorado"
             description="Will and the team in front of the shop, or the yard lined with Boss plows"
           />
         </div>
       </section>
 
-      {/* FLEET + COVERAGE */}
-      <Section eyebrow="Two ways we help" title="Whole fleets and the whole corridor">
-        <div className="grid gap-5 md:grid-cols-2">
-          <Link
-            href="/fleet"
-            className="group flex flex-col justify-between rounded-card border border-line bg-steel-800 p-7 transition-[border-color,transform] duration-200 hover:-translate-y-[3px] hover:border-gold-deep"
-          >
-            <div>
-              <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-gold-deep">
-                For fleet managers
-              </div>
-              <h3 className="mt-2 font-display text-h3 font-bold uppercase text-text">Fleet services</h3>
-              <p className="mt-3 text-[0.98rem] leading-relaxed text-muted">
-                One accountable shop for inspection and repair across your whole fleet. Scheduled
-                maintenance and tracked due dates, so no truck lapses out of compliance.
-              </p>
-            </div>
-            <span className="mt-5 font-mono text-[11px] uppercase tracking-[0.12em] text-gold group-hover:text-gold-bright">
-              Request a fleet quote →
-            </span>
-          </Link>
+      <Testimonials />
 
-          <Link
-            href="/service-area"
-            className="group flex flex-col justify-between rounded-card border border-line bg-steel-800 p-7 transition-[border-color,transform] duration-200 hover:-translate-y-[3px] hover:border-gold-deep"
-          >
-            <div>
-              <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-gold-deep">
-                Castle Rock to the Springs
+      {/* WHO WE SERVE */}
+      <Section eyebrow="Who we serve" title="Built around your operation">
+        <div className="grid gap-5 md:grid-cols-3">
+          {[
+            { href: "/fleet", kicker: "For fleet managers", title: "Fleet Services", text: "One accountable shop for inspection and repair across your whole fleet, with scheduled maintenance and tracked due dates.", cta: "Request a fleet quote" },
+            { href: "/contractors", kicker: "For contractors", title: "Contractors", text: "Work trucks, dump and equipment trailers, and the DOT compliance that keeps the crew on the job.", cta: "Contractor service" },
+            { href: "/landscaping", kicker: "For landscapers", title: "Landscaping", text: "Trucks, trailers, and Boss and SnowEx plows kept working through mowing season and snow season.", cta: "Landscaping service" },
+          ].map((c) => (
+            <Link
+              key={c.href}
+              href={c.href}
+              className="group flex flex-col justify-between rounded-card border border-line bg-steel-800 p-7 transition-[border-color,transform] duration-200 hover:-translate-y-[3px] hover:border-gold-deep"
+            >
+              <div>
+                <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-gold-deep">{c.kicker}</div>
+                <h3 className="mt-2 font-display text-h3 font-bold uppercase text-text">{c.title}</h3>
+                <p className="mt-3 text-[0.98rem] leading-relaxed text-muted">{c.text}</p>
               </div>
-              <h3 className="mt-2 font-display text-h3 font-bold uppercase text-text">Service area</h3>
-              <p className="mt-3 text-[0.98rem] leading-relaxed text-muted">
-                We serve the I-25 corridor and the towns around Sedalia, from Castle Rock and Parker
-                to Monument and Lone Tree. Easy on, easy off, easy back to work.
-              </p>
-            </div>
-            <span className="mt-5 font-mono text-[11px] uppercase tracking-[0.12em] text-gold group-hover:text-gold-bright">
-              See the towns we cover →
-            </span>
+              <span className="mt-5 font-mono text-[11px] uppercase tracking-[0.12em] text-gold group-hover:text-gold-bright">
+                {c.cta} &rarr;
+              </span>
+            </Link>
+          ))}
+        </div>
+        <div className="mt-8">
+          <Link href="/service-area" className="inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.14em] text-gold hover:text-gold-bright">
+            We cover the I-25 corridor, see your town <span aria-hidden>&rarr;</span>
+          </Link>
+        </div>
+      </Section>
+
+      {/* LATEST ARTICLES */}
+      <Section
+        bg="steel"
+        eyebrow="From the blog"
+        title="DOT and truck resources"
+        intro="Plain-spoken guides on inspections, repairs, and keeping a truck legal, written by the shop that does the work."
+      >
+        <div className="grid gap-5 md:grid-cols-3">
+          {POSTS.slice(0, 3).map((p) => (
+            <Link
+              key={p.meta.slug}
+              href={`/blog/${p.meta.slug}`}
+              className="group flex flex-col rounded-card border border-line bg-steel-800 p-6 transition-[border-color,transform] duration-200 hover:-translate-y-[3px] hover:border-gold-deep"
+            >
+              <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.16em] text-gold-deep">
+                <span>{p.meta.category}</span>
+                <span aria-hidden>·</span>
+                <span>{formatDate(p.meta.date)}</span>
+              </div>
+              <h3 className="mt-3 font-display text-[1.15rem] font-bold uppercase leading-tight tracking-tight text-text group-hover:text-gold-bright">
+                {p.meta.title}
+              </h3>
+              <p className="mt-2 flex-1 text-[0.92rem] leading-relaxed text-muted">{p.meta.description}</p>
+              <span className="mt-4 font-mono text-[11px] uppercase tracking-[0.12em] text-gold">Read &rarr;</span>
+            </Link>
+          ))}
+        </div>
+        <div className="mt-8">
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.14em] text-gold hover:text-gold-bright"
+          >
+            Read all articles <span aria-hidden>&rarr;</span>
           </Link>
         </div>
       </Section>

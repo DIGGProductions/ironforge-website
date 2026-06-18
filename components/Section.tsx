@@ -3,25 +3,19 @@ import Eyebrow from "./Eyebrow";
 
 type Bg = "black" | "steel" | "steel800" | "paper";
 
-const bgMap: Record<Bg, string> = {
-  black: "bg-forge-black text-text",
-  steel: "bg-steel-900 text-text",
-  steel800: "bg-steel-800 text-text",
-  paper: "bg-paper text-ink",
-};
-
-// Standard section wrapper: brand background, vertical rhythm, centered container,
-// optional eyebrow + heading. Vertical padding 72px to 100px on desktop.
+// Light body section. The dark hero, proof bar, CTA, and footer are their own
+// components and stay dark; everything routed through Section is the light zone.
+// bg "steel"/"steel800" render the slightly lighter alt surface for rhythm.
 export default function Section({
   children,
-  bg = "black",
+  bg = "paper",
   eyebrow,
   title,
   intro,
   id,
   className = "",
   headingLevel = "h2",
-  bordered = false,
+  bordered = true,
 }: {
   children?: ReactNode;
   bg?: Bg;
@@ -34,11 +28,11 @@ export default function Section({
   bordered?: boolean;
 }) {
   const Heading = headingLevel;
-  const isPaper = bg === "paper";
+  const alt = bg === "steel" || bg === "steel800" ? "surface-2" : "";
   return (
     <section
       id={id}
-      className={`${bgMap[bg]} ${bordered ? "border-t border-line" : ""} py-[clamp(56px,8vw,100px)] ${className}`}
+      className={`zone-light ${alt} ${bordered ? "border-t border-line" : ""} py-[clamp(56px,8vw,100px)] ${className}`}
     >
       <div className="container">
         {(eyebrow || title || intro) && (
@@ -48,15 +42,13 @@ export default function Section({
               <Heading
                 className={`mt-4 font-display font-extrabold uppercase ${
                   headingLevel === "h1" ? "text-h1" : "text-h2"
-                } ${isPaper ? "text-ink" : "text-text"}`}
+                } text-text`}
               >
                 {title}
               </Heading>
             )}
             {intro && (
-              <p className={`mt-5 text-[1.08rem] leading-relaxed ${isPaper ? "text-ink/80" : "text-muted"}`}>
-                {intro}
-              </p>
+              <p className="mt-5 text-[1.08rem] leading-relaxed text-muted">{intro}</p>
             )}
           </div>
         )}

@@ -29,10 +29,16 @@ export const SITE = {
 
   // [CONFIRM WITH WILL] preferred domain email (e.g. will@ironforgecolorado.com).
   // Left null on purpose. Do not publish an unconfirmed address.
-  email: null as string | null,
+  email: "IronForge80135@gmail.com" as string | null,
 
   corridor: "the I-25 corridor between Castle Rock and Colorado Springs",
   county: "Douglas County",
+  social: {
+    facebook: "https://www.facebook.com/IronForgeTrailers",
+    youtube: "https://www.youtube.com/@IronForgeCommercialRepair",
+    instagram: "https://www.instagram.com/ironforgecommercialrepair/",
+    x: "https://x.com/ironforgerepair",
+  },
 
   // The positioning spine, given by the owner brief (not an invented stat).
   moat:
@@ -45,6 +51,7 @@ export const NAV = [
   { label: "Services", href: "/services" },
   { label: "DOT Inspections", href: "/dot-inspection" },
   { label: "Fleet", href: "/fleet" },
+  { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ] as const;
@@ -66,6 +73,8 @@ export const FOOTER_NAV = {
     links: [
       { label: "About", href: "/about" },
       { label: "Fleet Services", href: "/fleet" },
+      { label: "Contractors", href: "/contractors" },
+      { label: "Landscaping", href: "/landscaping" },
       { label: "Certified Vehicle Scale", href: "/vehicle-scale" },
       { label: "Contact & Booking", href: "/contact" },
     ],

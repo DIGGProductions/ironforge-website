@@ -12,6 +12,12 @@ export function localBusinessSchema() {
     url: SITE.url,
     telephone: PHONE_E164,
     description: SITE.tagline,
+    image: `${SITE.url}/og.jpg`,
+    logo: `${SITE.url}/images/logo.webp`,
+    priceRange: "$$",
+    sameAs: Object.values(SITE.social),
+    hasMap:
+      "https://www.google.com/maps?q=7144+Reynolds+Drive,+Sedalia,+CO+80135",
     address: {
       "@type": "PostalAddress",
       streetAddress: SITE.address.street,

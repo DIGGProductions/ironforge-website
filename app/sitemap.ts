@@ -13,6 +13,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/dot-inspection",
     "/services",
     "/fleet",
+    "/contractors",
+    "/landscaping",
     "/vehicle-scale",
     "/service-area",
     "/about",

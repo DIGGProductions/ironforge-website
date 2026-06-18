@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import Section from "@/components/Section";
 import BookingForm from "@/components/BookingForm";
-import FlagNote from "@/components/FlagNote";
 import JsonLd from "@/components/JsonLd";
 import { SITE } from "@/content/site";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -50,8 +49,11 @@ export default function ContactPage() {
               >
                 {SITE.phoneDisplay}
               </a>
-              <p className="mt-4 flex flex-wrap items-center gap-2 text-[0.98rem] text-muted">
-                Email: <FlagNote>Confirm with Will</FlagNote>
+              <p className="mt-4 text-[0.98rem] text-muted">
+                Email:{" "}
+                <a href={`mailto:${SITE.email}`} className="font-semibold text-gold hover:text-gold-bright">
+                  {SITE.email}
+                </a>
               </p>
               <p className="mt-4 font-mono text-[12px] uppercase tracking-[0.12em] text-muted">
                 {SITE.hours}

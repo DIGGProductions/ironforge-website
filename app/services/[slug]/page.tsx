@@ -8,10 +8,10 @@ import PhotoSlot from "@/components/PhotoSlot";
 import Faq from "@/components/Faq";
 import CtaBand from "@/components/CtaBand";
 import Button from "@/components/Button";
-import FlagNote from "@/components/FlagNote";
 import JsonLd from "@/components/JsonLd";
 import { SERVICE_SLUGS, getService } from "@/content/services";
 import { SITE } from "@/content/site";
+import { SERVICE_PHOTOS } from "@/content/photos";
 import { serviceSchema, faqSchema, breadcrumbSchema } from "@/lib/schema";
 
 export const dynamicParams = false;
@@ -57,7 +57,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       <PageHero eyebrow="Service" title={s.title} sub={s.heroSub} crumbs={crumbs} />
 
       {/* The problem + photo */}
-      <section className="bg-forge-black py-[clamp(48px,7vw,88px)]">
+      <section className="zone-light border-t border-line py-[clamp(48px,7vw,88px)]">
         <div className="container grid items-center gap-12 lg:grid-cols-[1.05fr_.95fr]">
           <div>
             <Eyebrow>What you are dealing with</Eyebrow>
@@ -66,15 +66,8 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                 <p key={i}>{p}</p>
               ))}
             </div>
-            {s.confirm && s.confirm.length > 0 && (
-              <p className="mt-6 flex flex-wrap gap-2 text-[0.95rem] text-muted">
-                {s.confirm.map((c) => (
-                  <FlagNote key={c}>{c}</FlagNote>
-                ))}
-              </p>
-            )}
           </div>
-          <PhotoSlot ratio="aspect-[4/3]" description={s.photoDescription} />
+          <PhotoSlot ratio="aspect-[4/3]" src={SERVICE_PHOTOS[s.slug]} alt={`${s.nav} at Iron Forge, Sedalia CO`} description={s.photoDescription} />
         </div>
       </section>
 
@@ -105,7 +98,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       </Section>
 
       {/* One-stop angle, links to DOT */}
-      <section className="bg-forge-black pb-[clamp(40px,6vw,72px)]">
+      <section className="zone-light pb-[clamp(40px,6vw,72px)]">
         <div className="container">
           <div className="relative overflow-hidden rounded-card border border-gold-deep/60 bg-[linear-gradient(160deg,#1c2026,#121519)] p-7 md:p-10">
             <span className="absolute inset-x-0 top-0 h-[3px] bg-metal" />

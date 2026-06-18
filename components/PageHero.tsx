@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { ReactNode } from "react";
 import Eyebrow from "./Eyebrow";
 import Button from "./Button";
@@ -20,6 +21,8 @@ export default function PageHero({
   ctaHref = BOOK_HREF,
   ctaLabel = BOOK_LABEL,
   showCtas = true,
+  bgImage,
+  bgAlt = "",
 }: {
   eyebrow: ReactNode;
   title: ReactNode;
@@ -28,10 +31,22 @@ export default function PageHero({
   ctaHref?: string;
   ctaLabel?: string;
   showCtas?: boolean;
+  bgImage?: string;
+  bgAlt?: string;
 }) {
   return (
-    <section className="scanlines relative overflow-hidden border-b border-gold-deep/70" style={heroBg}>
-      <div className="container py-[clamp(40px,7vw,76px)]">
+    <section
+      className="relative overflow-hidden border-b border-gold-deep/70"
+      style={bgImage ? undefined : heroBg}
+    >
+      {bgImage && (
+        <>
+          <Image src={bgImage} alt={bgAlt} fill priority sizes="100vw" className="object-cover object-center" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(13,15,18,0.95)_0%,rgba(13,15,18,0.82)_48%,rgba(13,15,18,0.62)_100%)]" />
+        </>
+      )}
+      <div className="scanlines pointer-events-none absolute inset-0" />
+      <div className="container relative py-[clamp(40px,7vw,76px)]">
         {crumbs && crumbs.length > 0 && (
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[10.5px] uppercase tracking-[0.14em] text-muted">

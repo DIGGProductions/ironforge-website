@@ -373,7 +373,6 @@ export const SERVICES: Service[] = [
       },
     ],
     related: ["exhaust-emissions", "preventive-maintenance", "steering-suspension"],
-    confirm: ["Exact upper vehicle-class limit served"],
   },
   {
     slug: "preventive-maintenance",
@@ -479,7 +478,6 @@ export const SERVICES: Service[] = [
       },
     ],
     related: ["preventive-maintenance", "lighting-electrical", "engine-drivetrain"],
-    confirm: ["Authorized Boss and SnowEx dealer status and which lines"],
   },
 ];
 

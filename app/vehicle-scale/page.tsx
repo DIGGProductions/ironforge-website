@@ -4,10 +4,10 @@ import Section from "@/components/Section";
 import Eyebrow from "@/components/Eyebrow";
 import SpecPlate from "@/components/SpecPlate";
 import Button from "@/components/Button";
-import FlagNote from "@/components/FlagNote";
 import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import { SITE } from "@/content/site";
+import { PHOTOS } from "@/content/photos";
 import { serviceSchema, breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
@@ -38,9 +38,11 @@ export default function VehicleScalePage() {
         crumbs={crumbs}
         ctaHref={SITE.phoneHref}
         ctaLabel={`Call ${SITE.phoneDisplay}`}
+        bgImage={PHOTOS.scale}
+        bgAlt="The certified vehicle scale at Iron Forge in Sedalia, Colorado"
       />
 
-      <section className="bg-forge-black py-[clamp(48px,7vw,88px)]">
+      <section className="zone-light border-t border-line py-[clamp(48px,7vw,88px)]">
         <div className="container grid items-start gap-12 lg:grid-cols-[1.1fr_.9fr]">
           <div>
             <Eyebrow>What it is</Eyebrow>
@@ -69,9 +71,9 @@ export default function VehicleScalePage() {
             stampBottom="CO"
             rows={[
               { label: "Location", value: <>{SITE.address.street}<br />{SITE.address.city}, {SITE.address.state}</> },
-              { label: "Certification", value: <FlagNote>Confirm with Will</FlagNote> },
-              { label: "Hours", value: <FlagNote>Confirm with Will</FlagNote> },
-              { label: "Pricing", value: <FlagNote>Confirm with Will</FlagNote> },
+              { label: "We weigh", value: <>Gross &amp; axle weights</> },
+              { label: "Why it matters", value: <>Avoid overweight fines</> },
+              { label: "Hours", value: "Call ahead" },
             ]}
           />
         </div>
@@ -93,12 +95,11 @@ export default function VehicleScalePage() {
       <Section bg="black" eyebrow="Find us" title="Where the scale is">
         <p className="max-w-2xl text-[1.05rem] leading-relaxed text-muted">
           The scale is at our shop at {SITE.address.street}, {SITE.address.city}, {SITE.address.state}{" "}
-          {SITE.address.zip}, just off the corridor. Hours, certification details, and pricing are being
-          confirmed, so call ahead at{" "}
+          {SITE.address.zip}, just off the corridor. Call ahead at{" "}
           <a href={SITE.phoneHref} className="font-semibold text-gold hover:text-gold-bright">
             {SITE.phoneDisplay}
           </a>{" "}
-          before you come by.
+          to confirm the scale is open before you come by.
         </p>
       </Section>
 
