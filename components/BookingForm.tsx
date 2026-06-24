@@ -4,8 +4,9 @@ import { useState } from "react";
 import { SITE } from "@/content/site";
 
 // Reusable request form. Submissions POST to FormSubmit, which emails them to the shop
-// inbox. If that ever fails, it falls back to composing an email so nothing is lost.
-const FORM_ENDPOINT = "https://formsubmit.co/ajax/ironforge80135@gmail.com";
+// inbox (alias below maps to ironforge80135@gmail.com). If that ever fails, it falls back
+// to composing an email so nothing is lost.
+const FORM_ENDPOINT = "https://formsubmit.co/ajax/3c62156067f49daa15e8678f6d6cd6c9";
 
 type Kind = "inspection" | "fleet";
 
