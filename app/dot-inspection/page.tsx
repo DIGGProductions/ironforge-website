@@ -73,8 +73,6 @@ export default function DotInspectionPage() {
           <SpecPlate
             headLeft="DOT Inspection"
             headRight="Annual"
-            stampTop="DOT"
-            stampBottom="CO"
             rows={[
               { label: "What it is", value: "State annual safety inspection" },
               { label: "Covers", value: <>Brakes, steering, lights,<br />and more</> },
@@ -153,7 +151,7 @@ export default function DotInspectionPage() {
               before you come in.
             </p>
           </div>
-          <BookingForm id="book" kind="inspection" />
+          <BookingForm id="book-form" kind="inspection" />
         </div>
       </Section>
 

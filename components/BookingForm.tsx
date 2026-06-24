@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { SITE } from "@/content/site";
 
-// Reusable request form. If a real form service or scheduler is connected later,
-// set FORM_ENDPOINT. Until then it composes an email to the shop so no request is lost.
-const FORM_ENDPOINT = ""; // [CONFIRM WITH WILL] form service URL or scheduler embed
+// Reusable request form. Submissions POST to FormSubmit, which emails them to the shop
+// inbox. If that ever fails, it falls back to composing an email so nothing is lost.
+const FORM_ENDPOINT = "https://formsubmit.co/ajax/ironforge80135@gmail.com";
 
 type Kind = "inspection" | "fleet";
 
@@ -24,7 +24,7 @@ export default function BookingForm({
   heading?: string;
   intro?: string;
 }) {
-  const [status, setStatus] = useState<"idle" | "submitting" | "sent">("idle");
+  const [status, setStatus] = useState<"idle" | "submitting" | "sent" | "mailto">("idle");
 
   const defaultHeading = kind === "fleet" ? "Request a fleet quote" : "Request a DOT inspection";
   const defaultIntro =
@@ -36,29 +36,44 @@ export default function BookingForm({
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
+    const subject =
+      kind === "fleet"
+        ? "New fleet quote request (ironforgecolorado.com)"
+        : "New DOT inspection request (ironforgecolorado.com)";
 
     if (FORM_ENDPOINT) {
       try {
         setStatus("submitting");
-        const res = await fetch(FORM_ENDPOINT, { method: "POST", body: data, headers: { Accept: "application/json" } });
-        setStatus("sent");
-        if (res.ok) form.reset();
-        return;
+        data.append("_subject", subject);
+        data.append("_template", "table");
+        data.append("_captcha", "false");
+        const res = await fetch(FORM_ENDPOINT, {
+          method: "POST",
+          body: data,
+          headers: { Accept: "application/json" },
+        });
+        if (res.ok) {
+          setStatus("sent");
+          form.reset();
+          return;
+        }
+        // Non-OK response: fall through to the email fallback below.
       } catch {
-        // fall through to email
+        // Network error: fall through to the email fallback below.
       }
     }
 
-    // Email fallback: compose a message to the shop.
-    const subject = kind === "fleet" ? "Fleet quote request" : "DOT inspection request";
+    // Fallback so no request is ever lost: compose an email to the shop.
     const lines: string[] = [];
     data.forEach((value, key) => {
-      if (typeof value === "string" && value.trim()) lines.push(`${key}: ${value}`);
+      if (typeof value === "string" && value.trim() && !key.startsWith("_")) {
+        lines.push(`${key}: ${value}`);
+      }
     });
     const body = lines.join("\n");
-    const to = SITE.email ?? "";
+    const to = SITE.email ?? "ironforge80135@gmail.com";
     window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setStatus("sent");
+    setStatus("mailto");
   }
 
   return (
@@ -69,6 +84,7 @@ export default function BookingForm({
       <p className="mt-2 text-[0.98rem] text-muted">{intro ?? defaultIntro}</p>
 
       <form onSubmit={onSubmit} className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <input type="text" name="_honey" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
         <div>
           <label htmlFor={`${id}-name`} className={labelCls}>Name</label>
           <input id={`${id}-name`} name="Name" required className={fieldCls} autoComplete="name" />
@@ -122,7 +138,13 @@ export default function BookingForm({
 
       {status === "sent" && (
         <p className="mt-4 rounded-[3px] border border-gold-deep bg-gold/10 px-4 py-3 text-[0.95rem] text-gold-bright">
-          Thanks. Your email app should open with the details ready to send. If it does not, call{" "}
+          Thanks, we have your request and will be in touch. Need it sooner? Call{" "}
+          <a href={SITE.phoneHref} className="font-semibold underline">{SITE.phoneDisplay}</a>.
+        </p>
+      )}
+      {status === "mailto" && (
+        <p className="mt-4 rounded-[3px] border border-gold-deep bg-gold/10 px-4 py-3 text-[0.95rem] text-gold-bright">
+          Your email app should open with the details ready to send. If it does not, call{" "}
           <a href={SITE.phoneHref} className="font-semibold underline">{SITE.phoneDisplay}</a> and we will get you scheduled.
         </p>
       )}

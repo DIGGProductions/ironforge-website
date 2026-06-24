@@ -118,7 +118,7 @@ export default function FleetPage() {
               .
             </p>
           </div>
-          <BookingForm id="quote" kind="fleet" />
+          <BookingForm id="quote-form" kind="fleet" />
         </div>
       </Section>
 

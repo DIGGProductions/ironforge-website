@@ -67,8 +67,6 @@ export default function VehicleScalePage() {
           <SpecPlate
             headLeft="Vehicle Scale"
             headRight="Sedalia · CO"
-            stampTop="LB"
-            stampBottom="CO"
             rows={[
               { label: "Location", value: <>{SITE.address.street}<br />{SITE.address.city}, {SITE.address.state}</> },
               { label: "We weigh", value: <>Gross &amp; axle weights</> },
