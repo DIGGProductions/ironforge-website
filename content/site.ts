@@ -4,7 +4,7 @@
 export const SITE = {
   name: "Iron Forge Commercial Repair",
   shortName: "Iron Forge",
-  url: "https://ironforgecolorado.com",
+  url: "https://www.ironforgecolorado.com",
   tagline:
     "In-shop DOT inspections and full repair for medium-duty commercial trucks and trailers.",
 
