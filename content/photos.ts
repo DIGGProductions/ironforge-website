@@ -18,5 +18,4 @@ export const SERVICE_PHOTOS: Record<string, string> = {
   "exhaust-emissions": "/images/exhaust-emissions.jpg",
   "engine-drivetrain": "/images/engine-drivetrain.jpg",
   "preventive-maintenance": "/images/preventive-maintenance.jpg",
-  "snow-plows": "/images/snow-plows.jpg",
 };

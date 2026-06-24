@@ -23,18 +23,8 @@ export const TESTIMONIALS: Testimonial[] = [
   },
   {
     quote:
-      "If you need anything snow plow or related, these are the guys to see. Family owned, and it shows. Extremely skilled, experienced, and they stand behind their work.",
-    name: "Brian L.",
-  },
-  {
-    quote:
       "Outstanding customer service and high quality work. Will and Preston were friendly and quick, and they called me later that day to let me know the work was complete, same day. I will be taking any future work to them, including our RV camper.",
     name: "Ryan",
-  },
-  {
-    quote:
-      "I highly recommend Will over at Iron Forge. We bought four snow plows and they took great care of us. Top quality products at a fair price, and they have earned a customer for life.",
-    name: "Beau W.",
   },
   {
     quote:

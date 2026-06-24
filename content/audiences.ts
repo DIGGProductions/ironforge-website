@@ -60,17 +60,17 @@ export const AUDIENCES: Record<string, Audience> = {
   landscaping: {
     slug: "landscaping",
     name: "Landscaping",
-    metaTitle: "Truck, Trailer & Plow Service for Landscapers, Colorado | Iron Forge",
+    metaTitle: "Truck & Trailer Repair for Landscapers, Colorado | Iron Forge",
     metaDescription:
-      "Landscaping truck, trailer, and snow plow service in Douglas County. Trailer lights and brakes, tires, DOT inspections, PM, and Boss and SnowEx plow service. One shop, year-round.",
+      "Landscaping truck and trailer repair in Douglas County. Trailer lights and brakes, tires, DOT inspections, and preventive maintenance. One shop that keeps your crews moving.",
     keyword: "landscaping truck and trailer repair Colorado",
     eyebrow: "For landscapers · Douglas County",
-    title: "Truck, trailer, and plow service for landscapers",
+    title: "Truck and trailer repair for landscapers",
     heroSub:
-      "Mowing season or snow season, we keep your trucks, trailers, and plows working. One shop, all year.",
-    heroImage: "/images/snow-plows.jpg",
+      "The trucks and trailers your crews run all season, kept legal and working. One shop, fast turnaround.",
+    heroImage: "/images/fleet.jpg",
     intro: [
-      "Landscaping truck and trailer repair in Colorado runs on two seasons. All summer your crews are hauling, mowing, and loading, which is hard on trailers and tires. All winter those same trucks are plowing, which is hard on everything else. Iron Forge keeps landscapers running through both, with truck and trailer repair, DOT inspections, and Boss and SnowEx plow service under one roof.",
+      "Landscaping truck and trailer repair in Colorado comes down to keeping crews moving. All season your trucks and trailers are hauling, mowing, and loading, which is hard on trailers, tires, and brakes. When a truck or trailer goes down, the crew sits, and that lost day costs far more than the repair. Iron Forge keeps landscaping trucks and trailers on the road and runs the DOT inspection that keeps them legal, all under one roof.",
       "Landscape trailers live a rough life. Constant loading and unloading wears out ramps, axles, brakes, and the trailer lights that fail an inspection. We keep them legal and working, so a dead light or a worn brake does not park a crew in the busy season.",
     ],
     needsTitle: "What landscape crews come in for",
@@ -78,12 +78,11 @@ export const AUDIENCES: Record<string, Audience> = {
       { label: "Trailer brakes, axles, and lights", text: "Enclosed, dump, and utility trailers take constant abuse. We handle the brakes, axles, and the lighting and wiring that get written up most." },
       { label: "Tires and front-end wear", text: "Loaded trailers and stop-and-go routes wear tires fast. We sell and service them and fix the alignment that ruins the next set." },
       { label: "DOT inspections", text: "Your trucks and trailers have to be legal. We run the inspection and fix what it flags in one stop." },
-      { label: "Snow plow service and sales", text: "When the season turns, we get your Boss and SnowEx plows ready, and sell you the right one if you need it. The same shop, year-round." },
-      { label: "Maintenance for both seasons", text: "We schedule service around your busy stretches, so the trucks are ready when the work is, summer and winter." },
+      { label: "Maintenance that fits the work", text: "We schedule service around your busy stretches, so the trucks are ready when the work is." },
     ],
-    relevantServices: ["snow-plows", "lighting-electrical", "tires", "preventive-maintenance"],
+    relevantServices: ["lighting-electrical", "tires", "brake-repair", "preventive-maintenance"],
     closing:
-      "Landscapers need a shop that keeps the trucks, the trailers, and the plows going through both seasons. That is exactly what we do.",
+      "Landscapers need a shop that keeps the trucks and trailers going through the busy season and runs the inspections that keep them legal. That is exactly what we do.",
     testimonial: {
       quote: "Love these guys. I have been doing work with them for seven years. Always fair, always done right.",
       name: "Hi-Def Landscapes",

@@ -427,58 +427,6 @@ export const SERVICES: Service[] = [
     ],
     related: ["brake-repair", "steering-suspension", "tires"],
   },
-  {
-    slug: "snow-plows",
-    nav: "Snow Plows",
-    title: "Snow plow sales and service, Boss and SnowEx, Colorado",
-    metaTitle: "Boss & SnowEx Snow Plow Sales and Service, Colorado | Iron Forge",
-    metaDescription:
-      "Snow plow sales and service for Boss and SnowEx in Colorado. Plow hydraulics, controllers, cutting edges, and wiring serviced before the storm. Get ready for winter.",
-    keyword: "Boss snow plow dealer Colorado",
-    kicker: "Seasonal",
-    cardBlurb: "Boss and SnowEx plow sales and service. Get the plow ready before the first storm.",
-    photoDescription: "A Boss or SnowEx plow on a truck in the yard, or a plow on the service bench",
-    heroSub:
-      "Boss and SnowEx plow sales and service. We get the plow working before the snow flies, and fix it when it does not.",
-    problem: [
-      "A snow plow that will not lift or angle at four in the morning before a route is a problem you cannot afford. We sell and service Boss and SnowEx plows and get them ready before winter, so the first storm is not the test.",
-      "When a plow goes down mid-season, we get it back in the fight.",
-    ],
-    serviceIntro: "Plow sales, setup, and service for Boss and SnowEx.",
-    whatWeService: [
-      { label: "Hydraulics", text: "Pumps, cylinders, hoses, and fluid. The system that lifts and angles the blade." },
-      { label: "Controllers and wiring", text: "In-cab controllers, harnesses, and connectors that quit in the cold and wet." },
-      { label: "Cutting edges and wear parts", text: "Worn edges, shoes, and trip springs replaced before they chew up the moldboard." },
-      { label: "Plow lights", text: "Plow lights aimed and wired so you can see and be seen." },
-      { label: "Mounts and setup", text: "Plow mounts and truck-side setup done right for the truck." },
-      { label: "Pre-season service", text: "A full check before the season so the plow is ready when you are." },
-    ],
-    whyItMatters: [
-      "A plow truck only earns when the plow works. The time to find a bad solenoid or a cracked hose is in the shop in the fall, not in a parking lot during a storm.",
-      "We service the plow and the truck under it, so the whole rig is ready.",
-    ],
-    process: [
-      { step: "Bring it in before the season", text: "Fall is the time. We check the whole system." },
-      { step: "We test and service", text: "Hydraulics, controls, wiring, and wear parts." },
-      { step: "We fix what is worn", text: "Before it strands you mid-route." },
-      { step: "Mid-season support", text: "If it goes down in the snow, get it to us and we will get it going." },
-    ],
-    faqs: [
-      {
-        q: "Do you sell Boss and SnowEx plows or only service them?",
-        a: "We work on and sell Boss and SnowEx plows and set them up on your truck. Call us with your truck and the area you cover and we will help you spec the right plow.",
-      },
-      {
-        q: "When should I bring my plow in for service?",
-        a: "Before the season, in the fall. That is when we can find a weak hydraulic pump or a cracked hose without it costing you a route. We also handle mid-season repairs when a plow goes down.",
-      },
-      {
-        q: "My plow will not lift or angle. Can you fix it?",
-        a: "Yes. Most lift and angle problems come down to hydraulics, the controller, or the wiring. We test the system, find the fault, and get the blade moving again.",
-      },
-    ],
-    related: ["preventive-maintenance", "lighting-electrical", "engine-drivetrain"],
-  },
 ];
 
 export const SERVICE_SLUGS = SERVICES.map((s) => s.slug);

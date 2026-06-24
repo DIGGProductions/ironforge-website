@@ -21,8 +21,6 @@ import CheckEngine, { meta as mCheckEngine } from "./posts/diesel-check-engine-l
 import ColdStart, { meta as mColdStart } from "./posts/diesel-cold-start-problems.mdx";
 import PmSchedule, { meta as mPmSchedule } from "./posts/truck-preventive-maintenance-schedule.mdx";
 import PmCost, { meta as mPmCost } from "./posts/cost-of-skipping-preventive-maintenance.mdx";
-import PlowChecklist, { meta as mPlowChecklist } from "./posts/snow-plow-service-checklist.mdx";
-import PlowLift, { meta as mPlowLift } from "./posts/snow-plow-wont-lift-or-angle.mdx";
 
 export interface PostMeta {
   slug: string;
@@ -60,8 +58,6 @@ export const POSTS: Post[] = [
   { meta: mColdStart, Component: ColdStart },
   { meta: mPmSchedule, Component: PmSchedule },
   { meta: mPmCost, Component: PmCost },
-  { meta: mPlowChecklist, Component: PlowChecklist },
-  { meta: mPlowLift, Component: PlowLift },
 ].sort((a, b) => (a.meta.date < b.meta.date ? 1 : -1));
 
 export const POST_SLUGS = POSTS.map((p) => p.meta.slug);

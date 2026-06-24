@@ -69,7 +69,7 @@ export default function AboutPage() {
             ratio="aspect-[3/2]"
             src={PHOTOS.about}
             alt="The crew in the Iron Forge shop in Sedalia, Colorado"
-            description="Will and the team in front of the shop, or the yard lined with Boss plows"
+            description="Will and the team in front of the Iron Forge shop in Sedalia, Colorado"
           />
         </div>
       </section>

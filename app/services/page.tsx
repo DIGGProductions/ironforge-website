@@ -12,7 +12,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: { absolute: "Commercial Truck & Trailer Services | Iron Forge, Sedalia CO" },
   description:
-    "Full medium-duty truck and trailer repair plus in-shop DOT inspections in Sedalia, CO. Brakes, tires, lighting, suspension, emissions, engine, maintenance, and snow plows.",
+    "Full medium-duty truck and trailer repair plus in-shop DOT inspections in Sedalia, CO. Brakes, tires, lighting, suspension, emissions, engine, and maintenance.",
   alternates: { canonical: "/services" },
 };
 

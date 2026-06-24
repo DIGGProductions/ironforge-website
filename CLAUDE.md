@@ -15,7 +15,7 @@ The **only shop on the I-25 corridor between Castle Rock and Colorado Springs th
 
 ## Focus & scope — RECENT OWNER CHANGES (important)
 - **Primary focus: DOT inspections + the repairs that correspond to them** — brakes, tires, lighting/electrical, steering/suspension, exhaust/emissions (DPF/DEF), engine/drivetrain, preventive maintenance.
-- **Snow plows: KEEP sales + service only** (Boss & SnowEx). **Do NOT market snow plowing (the operation)** — Will stopped plowing. Reframe the snow-plow page to sales/service.
+- **Snow plows: REMOVED from the site entirely.** Will no longer sells, services, or markets snow plows. Do not add snow plow pages, services, posts, or mentions.
 - **Welding/fabrication: DO NOT advertise.** Will has no fabricator and doesn't do fabrication. *(If he confirms incidental repair-welding, a one-line mention is OK — never a fabrication-shop page.)*
 - Vehicles: **medium-duty trucks and trailers.**
 - Segments: fleet managers, contractors, landscapers, ranch/ag (Larkspur/Franktown).

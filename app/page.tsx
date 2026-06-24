@@ -102,7 +102,7 @@ export default function HomePage() {
             <Reveal delay={4}>
               <p className="mt-8 max-w-[40em] border-t border-line pt-5 font-mono text-[11.5px] leading-[1.9] tracking-wide text-muted">
                 Brakes · Tires · Lighting &amp; Electrical · Steering &amp; Suspension · Preventive
-                Maintenance · <strong className="font-semibold text-gold-bright">Boss &amp; SnowEx plows</strong>
+                Maintenance
               </p>
             </Reveal>
           </div>
@@ -172,7 +172,7 @@ export default function HomePage() {
             ratio="aspect-[3/2]"
             src={PHOTOS.about}
             alt="The crew in the Iron Forge shop in Sedalia, Colorado"
-            description="Will and the team in front of the shop, or the yard lined with Boss plows"
+            description="Will and the team in front of the Iron Forge shop in Sedalia, Colorado"
           />
         </div>
       </section>
@@ -185,7 +185,7 @@ export default function HomePage() {
           {[
             { href: "/fleet", kicker: "For fleet managers", title: "Fleet Services", text: "One accountable shop for inspection and repair across your whole fleet, with scheduled maintenance and tracked due dates.", cta: "Request a fleet quote" },
             { href: "/contractors", kicker: "For contractors", title: "Contractors", text: "Work trucks, dump and equipment trailers, and the DOT compliance that keeps the crew on the job.", cta: "Contractor service" },
-            { href: "/landscaping", kicker: "For landscapers", title: "Landscaping", text: "Trucks, trailers, and Boss and SnowEx plows kept working through mowing season and snow season.", cta: "Landscaping service" },
+            { href: "/landscaping", kicker: "For landscapers", title: "Landscaping", text: "Work trucks and trailers kept legal and running through the busy season, with the DOT inspections to match.", cta: "Landscaping service" },
           ].map((c) => (
             <Link
               key={c.href}
