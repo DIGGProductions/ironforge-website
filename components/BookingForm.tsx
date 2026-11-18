@@ -4,8 +4,11 @@ import { useState } from "react";
 import { SITE } from "@/content/site";
 
 // Reusable request form. Submissions POST to FormSubmit, which emails them to the shop
-// inbox (alias below maps to ironforge80135@gmail.com). If that ever fails, it falls back
-// to composing an email so nothing is lost.
+// inbox (alias below maps to ironforge80135@gmail.com). FormSubmit's ajax endpoint can
+// return HTTP 200 with {success:"false"} when it does not deliver, so we only show the
+// success message when the JSON body confirms success === "true". Anything else (bad
+// status, unconfirmed delivery, unreadable response, network error) shows a visible
+// error with the shop phone and email so the customer can retry or reach us directly.
 const FORM_ENDPOINT = "https://formsubmit.co/ajax/3c62156067f49daa15e8678f6d6cd6c9";
 
 type Kind = "inspection" | "fleet";
@@ -25,7 +28,7 @@ export default function BookingForm({
   heading?: string;
   intro?: string;
 }) {
-  const [status, setStatus] = useState<"idle" | "submitting" | "sent" | "mailto">("idle");
+  const [status, setStatus] = useState<"idle" | "submitting" | "sent" | "error">("idle");
 
   const defaultHeading = kind === "fleet" ? "Request a fleet quote" : "Request a DOT inspection";
   const defaultIntro =
@@ -42,39 +45,32 @@ export default function BookingForm({
         ? "New fleet quote request (ironforgecolorado.com)"
         : "New DOT inspection request (ironforgecolorado.com)";
 
-    if (FORM_ENDPOINT) {
+    try {
+      setStatus("submitting");
+      data.append("_subject", subject);
+      data.append("_template", "table");
+      data.append("_captcha", "false");
+      data.append("_url", window.location.href);
+      const res = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+      let json: { success?: unknown } | null = null;
       try {
-        setStatus("submitting");
-        data.append("_subject", subject);
-        data.append("_template", "table");
-        data.append("_captcha", "false");
-        const res = await fetch(FORM_ENDPOINT, {
-          method: "POST",
-          body: data,
-          headers: { Accept: "application/json" },
-        });
-        if (res.ok) {
-          setStatus("sent");
-          form.reset();
-          return;
-        }
-        // Non-OK response: fall through to the email fallback below.
+        json = await res.json();
       } catch {
-        // Network error: fall through to the email fallback below.
+        json = null;
       }
+      if (res.ok && json && String(json.success) === "true") {
+        setStatus("sent");
+        form.reset();
+        return;
+      }
+    } catch {
+      // Network error: handled below.
     }
-
-    // Fallback so no request is ever lost: compose an email to the shop.
-    const lines: string[] = [];
-    data.forEach((value, key) => {
-      if (typeof value === "string" && value.trim() && !key.startsWith("_")) {
-        lines.push(`${key}: ${value}`);
-      }
-    });
-    const body = lines.join("\n");
-    const to = SITE.email ?? "ironforge80135@gmail.com";
-    window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setStatus("mailto");
+    setStatus("error");
   }
 
   return (
@@ -143,11 +139,24 @@ export default function BookingForm({
           <a href={SITE.phoneHref} className="font-semibold underline">{SITE.phoneDisplay}</a>.
         </p>
       )}
-      {status === "mailto" && (
-        <p className="mt-4 rounded-[3px] border border-gold-deep bg-gold/10 px-4 py-3 text-[0.95rem] text-gold-bright">
-          Your email app should open with the details ready to send. If it does not, call{" "}
-          <a href={SITE.phoneHref} className="font-semibold underline">{SITE.phoneDisplay}</a> and we will get you scheduled.
-        </p>
+      {status === "error" && (
+        <div
+          role="alert"
+          aria-live="assertive"
+          className="mt-4 rounded-[3px] border border-red-500 bg-red-950/40 px-4 py-3 text-[0.95rem] text-red-200"
+        >
+          <p>
+            Sorry, your request didn&apos;t go through. Please call us at{" "}
+            <a href={SITE.phoneHref} className="font-semibold text-red-100 underline">{SITE.phoneDisplay}</a>.
+          </p>
+          <p className="mt-1">
+            Or email us at{" "}
+            <a href={`mailto:${SITE.email ?? "ironforge80135@gmail.com"}`} className="font-semibold text-red-100 underline">
+              {SITE.email ?? "ironforge80135@gmail.com"}
+            </a>
+            .
+          </p>
+        </div>
       )}
     </div>
   );
